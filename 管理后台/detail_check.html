@@ -1,0 +1,185 @@
+<admintpl file="header"/>
+<style type="text/css">
+.col-auto { overflow: auto; _zoom: 1;_float: left;}
+.col-right { float: right; width: 210px; overflow: hidden; margin-left: 6px; }
+.table th, .table td {vertical-align: middle;}
+</style>
+</head>
+<body class="J_scroll_fixed">
+<php>
+    $status_des=array(0=>'待审核',1=>'正常生效',2=>'未通过',3=>'已过期');
+</php>
+<div class="wrap J_check_wrap">
+  <form name="myform" id="myform" action="{:U('detail_check')}" method="post" class="form-horizontal J_ajaxForms">
+  <!--<form name="myform" id="myform" action="#" method="post" class="form-horizontal J_ajaxForms">-->
+
+  <div class="col-auto">
+    <div class="table_full">
+      <table class="table table-bordered">
+          <tr>
+              <th width="80">姓名</th>
+              <td>
+                  {$info.name}
+              </td>
+          </tr>
+          <tr>
+              <th width="80">电话</th>
+              <td>
+                  {$info.phone}
+              </td>
+          </tr>
+          <tr>
+              <th width="80">身份证号</th>
+              <td>
+                  {$info.card_id}
+              </td>
+          </tr>
+          <tr>
+              <th width="80">商铺号</th>
+              <td>
+                  <!--{$info.store_id}-->
+                  <input type="text" style="width:400px;" name="store_id" id="" value="{$info.store_id}" style="color:" class="input input_hd J_title_color" />
+              </td>
+          </tr>
+          <tr>
+              <th width="80">本人照片</th>
+              <td>
+                  <a href="{$info.photo}"><img style="height: 80px;" src="{$info.photo}" alt=""/></a>
+              </td>
+          </tr>
+          <tr>
+              <th width="80">身份证照片</th>
+              <td>
+                  <a href="{$info.card_img1}"><img style="height: 80px;" src="{$info.card_img1}" alt=""/></a>
+                  <a href="{$info.card_img2}"><img style="height: 80px;" src="{$info.card_img2}" alt=""/></a>
+              </td>
+          </tr>
+          <tr>
+              <th width="80">其他证照</th>
+              <td>
+                  <a href="{$info.certificate1}"><img style="height: 80px;" src="{$info.certificate1}" alt=""/></a>
+                  <a href="{$info.certificate2}"><img style="height: 80px;" src="{$info.certificate2}" alt=""/></a>
+                  <a href="{$info.certificate3}"><img style="height: 80px;" src="{$info.certificate3}" alt=""/></a>
+                  <a href="{$info.certificate4}"><img style="height: 80px;" src="{$info.certificate4}" alt=""/></a>
+                  <a href="{$info.certificate5}"><img style="height: 80px;" src="{$info.certificate5}" alt=""/></a>
+              </td>
+          </tr>
+          <tr>
+              <th width="80">类型</th>
+              <td>
+                  <!--{$info['type']==1?'员工':'临时施工'}-->
+                  <select class="select_2" name="type">
+                      <option value="1" <if condition='$info.type eq 1'>selected</if>>员工</option>
+                      <option value="2" <if condition='$info.type eq 2'>selected</if>>临时施工</option>
+                  </select>
+              </td>
+          </tr>
+          <tr>
+              <th width="80">状态</th>
+              <td>
+                  {$status_des[$info['status']]}
+              </td>
+          </tr>
+
+          <if condition="$check_type eq 1">
+              <tr>
+                  <th width="80">审核状态:</th>
+                  <td>
+                      <select class="select_2" name="status">
+                          <option value="0" <if condition='$info.check_biz eq 0'>selected</if>>待审核</option>
+                          <option value="2" <if condition='$info.check_biz eq 2'>selected</if>>通过</option>
+                          <option value="1" <if condition='$info.check_biz eq 1'>selected</if>>不通过</option>
+                      </select>
+                  </td>
+              </tr>
+              <else/>
+              <tr>
+                  <th width="80">审核状态:</th>
+                  <td>
+                      <select class="select_2" name="status">
+                          <option value="0" <if condition='$info.check_tra eq 0'>selected</if>>待审核</option>
+                          <option value="2" <if condition='$info.check_tra eq 2'>selected</if>>通过</option>
+                          <option value="1" <if condition='$info.check_tra eq 1'>selected</if>>不通过</option>
+                      </select>
+                  </td>
+              </tr>
+          </if>
+
+          <if condition="$check_type eq 1">
+              <tr>
+                  <th width="80">设置出入证有效截止时间</th>
+                  <td>
+                      <!--<input type="text" style="width:400px;" name="expiry_date" id="expiry_date" {$info.expiry_date}==0?value="":value="{$info.expiry_date|date='Y-m-d H:i:s',###}" style="color:" class="input input_hd J_datetime date" />-->
+                      <input type="text" style="width:400px;" name="expiry_date" id="expiry_date" value="{$info.expiry_date|date='Y-m-d H:i:s',###}" style="color:" class="input input_hd J_datetime date" />
+                      <!--<span>留空为当前时间</span>-->
+                  </td>
+              </tr>
+          </if>
+
+          <input type="hidden" name="id" value="{$info.id}"/>
+          <!--<tr>-->
+              <!--<th width="80">审核人姓名</th>-->
+              <!--<td>-->
+                  <!--<eq name="check_type" value="1">-->
+                      <!--&lt;!&ndash;<textarea name="content" id="" cols="10" rows="10">{$info.biz_verify}</textarea>&ndash;&gt;-->
+                      <!--<input type="text" style="width:400px;" name="content" id="" value="{$info.biz_verify}" style="color:" class="input input_hd J_title_color" />-->
+                  <!--<else />-->
+                      <!--&lt;!&ndash;<textarea name="content" id="" cols="10" rows="10">{$info.train_verify}</textarea>&ndash;&gt;-->
+                      <!--<input type="text" style="width:400px;" name="content" id="" value="{$info.train_verify}" style="color:" class="input input_hd J_title_color" />-->
+                  <!--</eq>-->
+
+                  <!--&lt;!&ndash;<input type="hidden" name="back_id" value="{$back.id}"/>&ndash;&gt;-->
+              <!--</td>-->
+          <!--</tr>-->
+      </table>
+    </div>
+  </div>
+  <!--<div class="form-actions">-->
+  <!--<div class="table-actions">-->
+           <!--<button class="btn btn-primary btn-small J_ajax_submit_btn" type="submit"-->
+                   <!--data-action="{:U('Pass/Passadmin/detail_check',array('status'=>2))}" data-subcheck="true" data-msg="你确定审核通过吗？">审核通过</button>-->
+           <!--<button class="btn btn-primary btn-small J_ajax_submit_btn" type="submit"-->
+                   <!--data-action="{:U('Pass/Passadmin/detail_check',array('status'=>2))}" data-subcheck="true" data-msg="你确定不通过退回吗？">不通过退回</button>-->
+      <!--&lt;!&ndash;<input type="hidden" name="status" value="2"/>&ndash;&gt;-->
+      		<!--&lt;!&ndash;<a class="btn" href="javascript:history.back()">返回</a>&ndash;&gt;-->
+
+  <!--</div>-->
+
+      <input type="hidden" name="check_type" value="{$check_type}"/>
+
+      <div class="form-actions">
+          <button class="btn btn-primary btn_submit J_ajax_submit_btn"type="submit">提交</button>
+          <a class="btn" href="javascript:history.back()">返回</a>
+      </div>
+
+
+ </form>
+</div>
+<script type="text/javascript" src="__ROOT__/statics/js/common.js"></script>
+<script type="text/javascript" src="__ROOT__/statics/js/content_addtop.js"></script>
+<script type="text/javascript">
+$(function () {
+//	setInterval(function(){public_lock_renewal();}, 10000);
+	$(".J_ajax_close_btn").on('click', function (e) {
+	    e.preventDefault();
+	    Wind.use("artDialog", function () {
+	        art.dialog({
+	            id: "question",
+	            icon: "question",
+	            fixed: true,
+	            lock: true,
+	            background: "#CCCCCC",
+	            opacity: 0,
+	            content: "您确定需要关闭当前页面嘛？",
+	            ok:function(){
+					setCookie("refersh_time",1);
+					window.close();
+					return true;
+				}
+	        });
+	    });
+	});
+});
+</script>
+</body>
+</html>
