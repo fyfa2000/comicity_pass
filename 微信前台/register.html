@@ -1,298 +1,500 @@
 <!DOCTYPE html>
-<html>
-<head lang="en">
+<html lang="zh-CN">
 
-    <include file="./themes/simplebootx/Portal/Active/Mobile/head.html" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,minimal-ui:ios">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>电子出入证申请</title>
+    <link rel="stylesheet" href="../css/weui.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <script src=""></script>
 </head>
-<style>
-body {
-margin: 0;
-height: 100%;
-width: 100%;
-}
-.body {
-width: 500px;
-height: 250px;
-border: 2px solid gray;
-border-radius: 15px;
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%,-50%);
-}
-.title {
-font-size: 24px;
-line-height: 48px;
-display: block;
-width: 500px;
-text-align: center;
-margin-top: 20px;
-user-select: none;
--ms-user-select: none;
-}
-.subtitle {
-font-size: 18px;
-}
-.date {
-display: block;
-width: 500px;
-font-size: 32px;
-text-align: center;
-margin-top: 25px;
-}
-.time {
-display: block;
-width: 500px;
-font-size: 32px;
-text-align: center;
-margin-top: 25px;
-}
-</style>
+
 <body>
 
-<!-- 先用div把内容居中在页面中间 -->
-<div class="body">
-    <!-- 标题 -->
-    <span class="title">当前时间<span class="subtitle"> &emsp;(北京时间，精确到秒)</span></span>
-    <!-- 显示年月日 周几-->
-    <span class="date" id="date"></span>
-    <!-- 显示时间 -->
-    <span class="time" id="time"></span>
-</div>
 
-
-
-<section class="information">
-    <form action="{:U('register')}" method="post" enctype="multipart/form-data">
-        <!--<input type="hidden" name="active_id" value="{$info.id}"/>-->
-        <!--<input type="hidden" name="type" value="{$info.type}"/>-->
-    <div class="info_title">
-        <!--<h2>{$info.title}</h2>-->
-        <p>电子出入证申请</p>
-    </div>
-
-
-
-    <div class="info_content">
-
-        <input type="hidden" name="id" value="{$info.id}">
-        <div class="info_input">
-            <span>姓名</span>    <input name="name" type="text" value="{$info.name}" />
+<section class="container">
+    <div class="weui-form">
+        <div class="weui-form__text-area">
+            <h2 class="weui-form__title">电子出入证申请</h2>
         </div>
-        <div class="info_input">
-            <span>手机号</span>    <input name="phone" type="text" value="{$info.phone}" />
-        </div>
-        <div class="info_input">
-            <span>身份证号</span>    <input name="card_id" type="text" value="{$info.card_id}" />
-        </div>
-        <div class="info_input">
-            <span>商铺号</span>    <input name="store_id" type="text" value="{$info.store_id}" />
-        </div>
-        <div class="layui-input-inline">
-            <select class="select_2" name="type">
-                <!--<option value='1' <if condition='$formget.ticket eq 1'>selected</if>>未出票</option>-->
-                <option value='1' <if condition='$info.type eq 1'>selected</if>>员工</option>
-                <option value='2' <if condition='$info.type eq 2'>selected</if>>临时施工</option>
-            </select>
-        </div>
-        <div class="info_input info_input_img">
-            <span>上传照片 <br/>200*300</span>
-            <div class="info_img">
-                <div class="file_img_btn">
-                    <input id="zs" class="userAddImg" name="logo" type="file" accept="image/jpg,image/jpeg,image/png" capture="camera">
-                    <div class="file_img_show">
-                        <img src="" alt=""/>
+        <div class="weui-form__control-area">
+            <div class="weui-cells__group weui-cells__group_form">
+                <div class="weui-cells__title">基本信息</div>
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell weui-cell_active">
+                        <div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
+                        <div class="weui-cell__bd">
+                            <input id="js_input_name" class="weui-input" placeholder="请输入姓名" >
+                        </div>
                     </div>
-                    <!--<img alt="" class="maximg"/>-->
+                    <div class="weui-cell weui-cell_active">
+                        <div class="weui-cell__hd"><label class="weui-label">手机号码</label></div>
+                        <div class="weui-cell__bd">
+                            <input id="js_input_mobile" class="weui-input" placeholder="请输入手机号码" type="number" pattern="[0-9]*">
+                        </div>
+                    </div>
+                    <div class="weui-cell weui-cell_active">
+                        <div class="weui-cell__hd"><label class="weui-label">身份证</label></div>
+                        <div class="weui-cell__bd">
+                            <input id="js_input_id" class="weui-input" placeholder="请输入身份证" type="number" pattern="[0-9]*">
+                        </div>
+                    </div>
+                    <div class="weui-cell weui-cell_active">
+                        <div class="weui-cell__hd"><label class="weui-label">商铺号</label></div>
+                        <div class="weui-cell__bd">
+                            <input id="js_input_num" class="weui-input" placeholder="请输入商铺号">
+                        </div>
+                    </div>
+
+                    <div class="weui-cells__title" style="margin-top: 20px;">类型</div>
+                    <div class="weui-cells weui-cells_radio">
+                        <label class="weui-cell weui-cell_active weui-check__label" for="x11">
+                            <div class="weui-cell__bd">
+                                <p>员工</p>
+                            </div>
+                            <div class="weui-cell__ft">
+                                <input type="radio" class="weui-check" name="radio1" id="x11" checked="checked" value="员工">
+                                <span class="weui-icon-checked"></span>
+                            </div>
+                        </label>
+                        <label class="weui-cell weui-cell_active weui-check__label" for="x12">
+
+                            <div class="weui-cell__bd">
+                                <p>施工人员</p>
+                            </div>
+                            <div class="weui-cell__ft">
+                                <input type="radio" name="radio1" class="weui-check" id="x12" value="施工人员">
+                                <span class="weui-icon-checked"></span>
+                            </div>
+                        </label>
+
+                    </div>
+
+
+
+
+                    <div class="weui-cells__title" style="margin-top: 20px;">图片上传</div>
+                    <input type="hidden" name="self_img" value=""/>
+                    <div class="weui-gallery" id="gallery">
+                        <span class="weui-gallery__img" id="galleryImg"></span>
+                        <div class="weui-gallery__opr">
+                            <a href="javascript:" class="weui-gallery__del" data-img>
+                                <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="weui-cell  weui-cell_uploader">
+                        <div class="weui-cell__bd">
+                            <div class="weui-uploader">
+                                <div class="weui-uploader__hd">
+                                    <p class="weui-uploader__title">上传照片</p>
+                                    <!-- <div class="weui-uploader__info">0/2</div> -->
+                                </div>
+                                <div class="weui-uploader__bd">
+                                    <ul class="weui-uploader__files" id="uploaderFiles">
+                                        <!-- <li class="weui-uploader__file" style="background-image: url(https://weui.io/images/pic_160.png);"></li> -->
+                                        <!-- <li class="weui-uploader__file" style="background-image: url(https://weui.io/images/pic_160.png);"></li> -->
+
+                                    </ul>
+                                    <div class="weui-uploader__input-box">
+                                        <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="weui-gallery" id="gallery02">
+                        <span class="weui-gallery__img" id="galleryImg02"></span>
+                        <div class="weui-gallery__opr">
+                            <a href="javascript:" class="weui-gallery__del" data-img-id>
+                                <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="weui-cell  weui-cell_uploader">
+                        <div class="weui-cell__bd">
+                            <div class="weui-uploader">
+                                <div class="weui-uploader__hd">
+                                    <p class="weui-uploader__title"><span style="color: #f00">*</span> 请上传身份证正反面</p>
+                                    <!-- <div class="weui-uploader__info">0/2</div> -->
+                                </div>
+                                <div class="weui-uploader__bd">
+                                    <ul class="weui-uploader__files" id="uploaderFiles02">
+                                        <!-- <li class="weui-uploader__file" style="background-image: url(https://weui.io/images/pic_160.png);"></li> -->
+                                        <!-- <li class="weui-uploader__file" style="background-image: url(https://weui.io/images/pic_160.png);"></li> -->
+
+                                    </ul>
+                                    <div class="weui-uploader__input-box">
+                                        <input id="uploaderInput02" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="weui-gallery" id="gallery03">
+                        <span class="weui-gallery__img" id="galleryImg03"></span>
+                        <div class="weui-gallery__opr">
+                            <a href="javascript:" class="weui-gallery__del" data-img-other>
+                                <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="weui-cell  weui-cell_uploader">
+                        <div class="weui-cell__bd">
+                            <div class="weui-uploader">
+                                <div class="weui-uploader__hd">
+                                    <p class="weui-uploader__title">其它证照，例:电工证，焊工证等(可选)</p>
+                                    <!-- <div class="weui-uploader__info">0/2</div> -->
+                                </div>
+                                <div class="weui-uploader__bd">
+                                    <ul class="weui-uploader__files" id="uploaderFiles03">
+                                        <!-- <li class="weui-uploader__file" style="background-image: url(https://weui.io/images/pic_160.png);"></li> -->
+                                        <!-- <li class="weui-uploader__file" style="background-image: url(https://weui.io/images/pic_160.png);"></li> -->
+
+                                    </ul>
+                                    <div class="weui-uploader__input-box">
+                                        <input id="uploaderInput03" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
 
             </div>
         </div>
-
-        <div class="info_input info_input_img">
-            <span>上传身份证 <br/>200*300</span>
-            <div class="info_img">
-                <div class="file_img_btn">
-                    <input id="zs" class="userAddImg" name="card_img" type="file" accept="image/jpg,image/jpeg,image/png" capture="camera">
-                    <div class="file_img_show">
-                        <img src="" alt=""/>
-                    </div>
-                    <!--<img alt="" class="maximg"/>-->
-                </div>
-
-            </div>
+        <div class="weui-form__tips-area">
+            <!-- <p class="weui-form__tips">
+              表单页提示，居中对齐
+            </p> -->
         </div>
-        <!--<p class="info_tip"><strong>温馨提示：</strong>请认真核对信息，提交后不可更改！</p>-->
-    </div>
+        <div class="weui-form__opr-area">
+            <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">提交</a>
+        </div>
 
 
-    <div class="info_btn" style="padding-top:20px">
-        <button class="infomation_btn">提交</button>
     </div>
-</form>
 </section>
+<div class="weui-toptips weui-toptips_warn" id="topTips"></div>
 </body>
-<script src="__active__/Mobile/js/jquery.min.js"></script>
-<script src="__active__/Mobile/js/otherfunction.js"></script>
-<script>
+
+<script src="../js/zepto.min.js"></script>
+<script src="../js/weui.js"></script>
+<script type="text/javascript">
+    //上传图片地址
+    var imgUrl1 = "", //上传图片
+        imgUrl2 = "", //上传身份证
+        imgUrl3 = ""; //上传其他图片
+
     $(function(){
-        $('.infomation_btn').on('click',function(){
-            if($('input[name="name"]').val() == ''){
-                alert('名字不能为空');
-                return false
-            }
-            if($('input[name="tel"]').val() == '' || !(/^1[34578]\d{9}$/.test($('input[name="tel"]').val()))){
-                alert('手机号码格式错误');
-                return false
-            }
-            if($('.userAddImg').val() == ''){
-                alert('请上传图片');
-                return false
-            }
-            $('form').submit();
-        });
-
-        var sex = 1;
-        var birthdayYear = '2017';
-        var birthdayMoth = '6';
-        $.ms_DatePicker({
-            YearSelector: ".sel_year",
-            MonthSelector: ".sel_month",
-//            DaySelector: ".sel_day"
-        });
-        $('input[type="radio"]').on('click',function(){
-            sex = $(this).val();
-            getCache(sex,birthdayYear+'-'+birthdayMoth)
-        });
-        $(".sel_year").change(function(){
-            console.log($(this).val());
-            birthdayYear = $(this).val();
-            getCache(sex,birthdayYear+'-'+birthdayMoth)
-        });
-        $(".sel_month").change(function(){
-            console.log($(this).val());
-            birthdayMoth = $(this).val();
-            getCache(sex,birthdayYear+'-'+birthdayMoth)
-        });
-        window.onload=function(){
-            setTimeout(function(){
-                getCache(sex,birthdayYear+'-'+birthdayMoth)
-            },10)
-        }
-    });
-
-    //判断是否为微信浏览器端
-    function isWeiXin(){
-        var ua = window.navigator.userAgent.toLowerCase();
-        if(ua.match(/MicroMessenger/i) == 'micromessenger'){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    function getCache(sex,birthday){
-        var option = '';
-        var select_groups = $('.select_groups');
-        if(!sex){
-            sex = 0;
-        }
-        $.ajax({
-            type: "POST",
-            url: "{:U('Active/get_group')}",
-            data: {sex:sex,birthday:birthday},
-            dataType: "json",
-            timeout : 10000,
-            beforeSend: function () {
-
-            },
-            success: function(data){
-                if(data.status == 1){
-                    select_groups.html('');
-                    $.each(data.data,function(i){
-                        var d = data.data[i];
-                        if(data.data[i].select == 1){
-                            $(".select_groups").append("<option value='"+ d.id+"'>"+d.title+"</option>");
-                            document.getElementsByClassName('select_groups')[0].options[i].selected = true;
-                        }else{
-                            select_groups.append("<option value='"+ d.id+"'>"+d.title+"</option>")
-                        }
-                    })
-                }
-            },
-            error: function(){
-                alert('网络出错');
+        $("#showTooltips").on("click",function(){
+            var name = $("#js_input_name").val();
+            var mobile = $("#js_input_mobile").val();
+            var idCard = $("#js_input_id").val();
+            var num = $("#js_input_num").val();
+            var type = $("[name=radio1]:checked").val()
+            var topTips = $("#topTips")
+            if(!name){topTips.html("姓名不能为空");
+                topTips.fadeIn(200);setTimeout(function(){topTips.fadeOut(200)},2000)
                 return false;
             }
+            if(!checkPhone(mobile)){topTips.html("手机号码有误");
+                topTips.fadeIn(200);setTimeout(function(){topTips.fadeOut(200)},2000)
+                return false;
+            }
+            if(!idCard){topTips.html("身份证不能为空");
+                topTips.fadeIn(200);setTimeout(function(){topTips.fadeOut(200)},2000)
+                return false;
+            }
+            if(!$("#uploaderFiles li").length>0){
+                topTips.html("请上传图片");
+                topTips.fadeIn(200);setTimeout(function(){topTips.fadeOut(200)},2000)
+                return false;
+            }
+            if(!$("#uploaderFiles02 li").length>0){
+                topTips.html("请上传身份证正反面");
+                topTips.fadeIn(200);setTimeout(function(){topTips.fadeOut(200)},2000)
+                return false;
+            }
+
+            if(!$("#uploaderFiles03 li").length>0){
+                topTips.html("请上传其他证照");
+                topTips.fadeIn(200);setTimeout(function(){topTips.fadeOut(200)},2000)
+                return false;
+            }
+
+
+
+            $.post(
+                "url",
+                {name:name,id:idCard,mobile:mobile,num:num,type:type,},
+                function(res){
+
+                    // 提交成功
+                    console.log(res)
+
+                },"json")
+
+
         })
+    })
+    $(function(){
+        var tmpl = '<li class="weui-uploader__file" data-url="#url#" style="background-image:url(#url#)"  ></li>',
+            $gallery = $("#gallery"), $galleryImg = $("#galleryImg"),
+            $uploaderInput = $("#uploaderInput"),
+            $uploaderFiles = $("#uploaderFiles");
+
+        $uploaderInput.on("change", function(e){
+            var that = this;
+            var src, url = window.URL || window.webkitURL || window.mozURL, files = e.target.files;
+            for (var i = 0, len = files.length; i < len; ++i) {
+                var file = files[i];
+                tmpl.replace("#data#",1111)
+                var oFReader = new FileReader();
+                oFReader.readAsDataURL(file);
+                oFReader.onload = function (oFREvent) {
+                    // if (url) {
+                    //         src = url.createObjectURL(file);
+                    //     } else {
+                    //         src = e.target.result;
+                    //     }
+
+                    //     $uploaderFiles.append($(tmpl.replace('#url#', src)));
+
+                    $.post(imgUrl1,{img:oFREvent.target.result},function(data){
+                        console.log(data);
+
+
+                        if (url) {
+                            src = url.createObjectURL(file);
+                        } else {
+                            src = e.target.result;
+                        }
+
+
+                        $uploaderFiles.append($(tmpl.replace(/#url#/g, src)));
+                        //限制上传文件的数量
+                        // if($uploaderFiles.children().length>=2){
+                        //     $(that).parent().hide();
+                        // }
+                    },"json");
+                };
+
+            }
+        });
+        $uploaderFiles.on("click", "li", function(){
+            $galleryImg.attr("style", this.getAttribute("style"));
+            $('[data-img]').attr("data-url", this.getAttribute("data-url"));
+            $gallery.fadeIn(100);
+        });
+        $gallery.on("click", function(){
+            $gallery.fadeOut(100);
+        });
+
+        $('[data-img]').on("click",function(){
+            // cardInput.val("");
+            var url = $(this).attr('data-url');
+
+            $uploaderFiles.find("li").each(function(){
+                console.log($(this).attr("data-url"))
+                if($(this).attr("data-url") == url){
+                    $(this).remove()
+                    return false
+                }
+            });
+
+            $uploaderInput.parent().show();
+        });
+    });
+
+
+    $(function(){
+        var tmpl = '<li class="weui-uploader__file" data-url="#url#" style="background-image:url(#url#)"></li>',
+            $gallery = $("#gallery02"), $galleryImg = $("#galleryImg02"),
+            $uploaderInput = $("#uploaderInput02"),
+            $uploaderFiles = $("#uploaderFiles02");
+
+        $uploaderInput.on("change", function(e){
+            var that = this;
+            var src, url = window.URL || window.webkitURL || window.mozURL, files = e.target.files;
+            for (var i = 0, len = files.length; i < len; ++i) {
+                var file = files[i];
+
+                var oFReader = new FileReader();
+                oFReader.readAsDataURL(file);
+                oFReader.onload = function (oFREvent) {
+                    $.post(imgUrl2,{img:oFREvent.target.result},function(data){
+                        console.log(data);
+
+                        // cardInput.get($uploaderFiles.children().length).value = data.url;
+
+                        if (url) {
+                            src = url.createObjectURL(file);
+                        } else {
+                            src = e.target.result;
+                        }
+
+                        $uploaderFiles.append($(tmpl.replace(/#url#/g, src)));
+                        //限制上传文件的数量
+                        if($uploaderFiles.children().length>=2){
+                            $(that).parent().hide();
+                        }
+                    },"json");
+                };
+
+            }
+        });
+        $uploaderFiles.on("click", "li", function(){
+            $galleryImg.attr("style", this.getAttribute("style"));
+            $gallery.fadeIn(100);
+            $('[data-img]').attr("data-url", this.getAttribute("data-url"));
+        });
+        $gallery.on("click", function(){
+            $gallery.fadeOut(100);
+        });
+
+        $('[data-img-id]').on("click",function(){
+            // cardInput.val("");
+            // $uploaderFiles.children(":first-child").remove();
+            var url = $(this).attr('data-url');
+
+            $uploaderFiles.find("li").each(function(){
+                console.log($(this).attr("data-url"))
+                if($(this).attr("data-url") == url){
+                    $(this).remove()
+                    return false
+                }
+            });
+            $uploaderInput.parent().show();
+        });
+    });
+
+
+    $(function(){
+        var tmpl = '<li class="weui-uploader__file" data-url="#url#" style="background-image:url(#url#)"></li>',
+            $gallery = $("#gallery03"), $galleryImg = $("#galleryImg03"),
+            $uploaderInput = $("#uploaderInput03"),
+            $uploaderFiles = $("#uploaderFiles03");
+
+        $uploaderInput.on("change", function(e){
+            var that = this;
+            var src, url = window.URL || window.webkitURL || window.mozURL, files = e.target.files;
+            for (var i = 0, len = files.length; i < len; ++i) {
+                var file = files[i];
+
+                var oFReader = new FileReader();
+                oFReader.readAsDataURL(file);
+                oFReader.onload = function (oFREvent) {
+                    $.post(imgUrl3,{img:oFREvent.target.result},function(data){
+                        console.log(data);
+
+                        // cardInput.get($uploaderFiles.children().length).value = data.url;
+
+                        if (url) {
+                            src = url.createObjectURL(file);
+                        } else {
+                            src = e.target.result;
+                        }
+
+                        $uploaderFiles.append($(tmpl.replace(/#url#/g, src)));
+                        //限制上传文件的数量
+                        // if($uploaderFiles.children().length>=2){
+                        //     $(that).parent().hide();
+                        // }
+                    },"json");
+                };
+
+            }
+        });
+        $uploaderFiles.on("click", "li", function(){
+            $galleryImg.attr("style", this.getAttribute("style"));
+            $gallery.fadeIn(100);
+            $('[data-img]').attr("data-url", this.getAttribute("data-url"));
+        });
+        $gallery.on("click", function(){
+            $gallery.fadeOut(100);
+        });
+
+        $('[data-img-other]').on("click",function(){
+            // cardInput.val("");
+            // $uploaderFiles.children(":first-child").remove();
+            var url = $(this).attr('data-url');
+
+            $uploaderFiles.find("li").each(function(){
+                console.log($(this).attr("data-url"))
+                if($(this).attr("data-url") == url){
+                    $(this).remove()
+                    return false
+                }
+            });
+
+            $uploaderInput.parent().show();
+        });
+    });
+
+
+
+    function checkPhone(phone){
+        if(!(/^1[3456789]\d{9}$/.test(phone))){
+            // alert("手机号码有误，请重填");
+            return false;
+        }else{
+            return true
+        }
     }
+
+    // // 函数参数必须是字符串，因为二代身份证号码是十八位，而在javascript中，十八位的数值会超出计算范围，造成不精确的结果，导致最后两位和计算的值不一致，从而该函数出现错误。
+    // // 详情查看javascript的数值范围
+    // function checkIDCard(idcode){
+    //     // 加权因子
+    //     var weight_factor = [7,9,10,5,8,4,2,1,6,3,7,9,10,5,8,4,2];
+    //     // 校验码
+    //     var check_code = ['1', '0', 'X' , '9', '8', '7', '6', '5', '4', '3', '2'];
+
+    //     var code = idcode + "";
+    //     var last = idcode[17];//最后一位
+
+    //     var seventeen = code.substring(0,17);
+
+    //     // ISO 7064:1983.MOD 11-2
+    //     // 判断最后一位校验码是否正确
+    //     var arr = seventeen.split("");
+    //     var len = arr.length;
+    //     var num = 0;
+    //     for(var i = 0; i < len; i++){
+    //         num = num + arr[i] * weight_factor[i];
+    //     }
+
+    //     // 获取余数
+    //     var resisue = num%11;
+    //     var last_no = check_code[resisue];
+
+    //     // 格式的正则
+    //     // 正则思路
+    //     /*
+    //     第一位不可能是0
+    //     第二位到第六位可以是0-9
+    //     第七位到第十位是年份，所以七八位为19或者20
+    //     十一位和十二位是月份，这两位是01-12之间的数值
+    //     十三位和十四位是日期，是从01-31之间的数值
+    //     十五，十六，十七都是数字0-9
+    //     十八位可能是数字0-9，也可能是X
+    //     */
+    //     var idcard_patter = /^[1-9][0-9]{5}([1][9][0-9]{2}|[2][0][0|1][0-9])([0][1-9]|[1][0|1|2])([0][1-9]|[1|2][0-9]|[3][0|1])[0-9]{3}([0-9]|[X])$/;
+
+    //     // 判断格式是否正确
+    //     var format = idcard_patter.test(idcode);
+
+    //     // 返回验证结果，校验码和格式同时正确才算是合法的身份证号码
+    //     return last === last_no && format ? true : false;
+    // }
 </script>
-<script>
-
-    function getFullDate(){
-        var now = new Date();
-        var year = now.getFullYear(); //获取四位数的年份
-        var month = now.getMonth()+1; //获取月份（0~11）
-        var date = now.getDate(); //获取日期（1~31）
-        var day = now.getDay(); //获取周几的某一天（0~6）
-        var hour = now.getHours(); //获取小时（0~23）
-        var minute = now.getMinutes(); //获取分钟（0~59）
-        var second = now.getSeconds(); //获取秒钟（0~59）
-
-        // 补位和转化
-        // 因为getDay获取的数值是0~6，所以需要转为大写
-        // 因为获取到的数值0~9均为个位数，所以小于10的数需要转为两位数，在前面补0
-
-        //补位
-        if (month < 10) {
-            var month = '0'+ month;
-        }
-        if (date < 10) {
-            var date = '0' + date;
-        }
-        if (hour < 10) {
-            var hour = '0' + hour;
-        }
-        if (minute < 10) {
-            var minute = '0' + minute;
-        }
-        if (second < 10) {
-            var second = '0' + second;
-        }
-
-        //转化
-        if (day == 0) {
-            var day = '日';
-        }
-        if (day == 1) {
-            var day = '一';
-        }
-        if (day == 2) {
-            var day = '二';
-        }
-        if (day == 3) {
-            var day = '三';
-        }
-        if (day == 4) {
-            var day = '四';
-        }
-        if (day == 5) {
-            var day = '五';
-        }
-        if (day == 6) {
-            var day = '六';
-        }
-
-        //输出到网页
-        document.getElementById('date').innerHTML = year + '年' + month + '月' + date + '日   周'+ day;
-        document.getElementById('time').innerHTML = hour + ':' + minute + ':' + second;
-
-        //每一秒执行一次
-        setTimeout("getFullDate()",1000);
-    }
-    getFullDate();
-
-</script>
-
-
 </html>
