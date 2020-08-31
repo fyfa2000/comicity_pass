@@ -1,0 +1,76 @@
+body {
+  max-width: 640px;
+  margin: 0 auto;
+}
+.userInfo {
+  background: url(../img/bg.png) no-repeat center;
+  background-size: cover;
+  padding-top: 23px;
+}
+.userInfo .header {
+  background: url(../img/logo.png) no-repeat center;
+  background-size: 149px 23px;
+  height: 23px;
+}
+.userInfo .content h2 {
+  font-size: 50px;
+  color: #fff;
+  text-align: center;
+  padding-bottom: 20px;
+}
+.userInfo .headImg {
+  width: 180px;
+  height: 200px;
+  background-color: #fff;
+  margin: 0 auto;
+  border-radius: 5px;
+}
+.userInfo .headImg img {
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0 auto;
+  height: auto;
+  display: block;
+}
+.userInfo .infoList {
+  margin-top: 15px;
+}
+.userInfo .infoList .list {
+  width: 310px;
+  margin: 0 auto;
+  margin-bottom: 8px;
+}
+.userInfo .infoList .list .left,
+.userInfo .infoList .list .right {
+  display: inline-block;
+  background-color: #fff;
+  padding: 0 10px;
+  border-radius: 10px;
+  height: 35px;
+  line-height: 35px;
+}
+.userInfo .infoList .list p {
+  color: #163360;
+  background-color: #fff;
+  padding: 0 10px;
+  border-radius: 10px;
+  height: 35px;
+  line-height: 35px;
+}
+.userInfo .btn {
+  text-align: center;
+  padding: 20px 0;
+}
+.userInfo .btn a {
+  background-color: #fff;
+  border: 1px solid #163360;
+  border-radius: 10px;
+  padding: 0 10px;
+  font-size: 15px;
+  color: #163360;
+  display: inline-block;
+}
+.userInfo .btn a:active {
+  background-color: #387de4;
+  color: #fff;
+}

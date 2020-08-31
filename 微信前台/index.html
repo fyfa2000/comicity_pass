@@ -1,54 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <include file="./themes/simplebootx/Film/fenxiao/Public/head.html" />
-</head>
-<body>
-    <header class="comm-header">
-        <a href="javascript:history.back(-1)" class="comm-header-left"></a>
-        <div class="comm-header-center">
-            电子出入证
-        </div>
-        <!-- <div class="comm-header-right"></div> -->
-    </header>
-    <div class="comm-container content_in_logo color">
-        <div class="basics-list interval_top">
-            <div class="basics-list-item"><span>相片：</span><p><img style="width: 3rem;" src="__ROOT__/{$info.photo}" alt=""></p></div>
-            <!--<div class="basics-list-item"><span>有效期至：</span>{$info.expiry_date}</div>-->
-            <div class="basics-list-item"><span>有效期至：</span>
-                <eq name="info.status" value="1">
-                    {$info.expiry_date|date="Y-m",###}
-                <else />
-                    {$info.status_name}
-                </eq>
-            </div>
-            <div class="basics-list-item"><span>审核人：</span>
-                <eq name="info.type" value="1">
-                客服经营部
-                    <else />
-                安管部
-                </eq>
-            </div>
-            <div class="basics-list-item"><span>姓名：</span>{$info.name}</div>
-            <div class="basics-list-item"><span>电话：</span>{$info.phone}</div>
-            <div class="basics-list-item"><span>身份证号：</span>{$info.card_id}</div>
-            <div class="basics-list-item"><span>类型：</span>{$info['type']==1?'员工':'临时施工'}</div>
-            <div class="basics-list-item"><span>商铺号：</span>{$info.store_id}</div>
-            <div class="basics-list-item"><span>出入证当前状态：</span>{$info.status}</div>
-            <div class="basics-list-item"><span>出入证id：</span>{$info.id}</div>
-            <div class="info_btn" style="padding-top:20px">
-                <button class="infomation_btn"><a href="{:U('register',array('id'=>$info['id']))}">修改信息</a></button>
-            </div>
+<html lang="zh-CN">
 
-            <!--<div class="basics-list-item"><span>openid：</span><p>{$fenxiao.openid}</p></div>-->
-            <!--<div class="basics-list-item"><span>链&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;接：</span><p>http://c.miaopiao.me__ROOT__/index.php?g=Film&m=Index&a=index&fid={$fenxiao.id} </p></div>-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,minimal-ui:ios">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>客服部通行证</title>
+    <link rel="stylesheet" href="__ROOT__/tpl/simplebootx_mobile/Mobile/Pass/css/weui.css">
+    <link rel="stylesheet" href="__ROOT__/tpl/simplebootx_mobile/Mobile/Pass/css/app.css">
+    <script src=""></script>
+</head>
+
+<body>
+<section class="userInfo">
+    <div class="header"></div>
+    <div class="content">
+        <h2>电子出入证</h2>
+        <div class="headImg">
+            <img src="__ROOT__/{$info.photo}" alt="用户头像">
+        </div>
+        <div class="infoList">
+            <div class="list">
+                <p >
+                    <span>有效期至：</span>
+                    <span>
+                        <eq name="info.status" value="1">
+                              <if condition="$info['expiry_date'] neq 0">{$info.expiry_date|date="Y-m",###}</if>
+                        <else />
+                            {$info.status_name}
+                        </eq>
+                    </span>
+                </p>
+
+            </div>
+            <div class="list">
+                <p >
+                    <span>审核部门：</span>
+                    <span>
+                       <eq name="info.type" value="1">
+                        客服经营部
+                            <else />
+                        安管部
+                        </eq>
+                    </span>
+                </p>
+            </div>
+            <div class="list">
+                <p>
+                    <span class="title">姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：</span>
+                    <span>{$info.name}</span>
+                </p>
+            </div>
+            <div class="list">
+                <p>
+                    <span class="title">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：</span>
+                    <span>{$info.phone}</span>
+                </p>
+            </div>
+            <div class="list">
+                <p>
+                    <span class="title">身份证件：</span>
+                    <span>{$info.card_id}</span>
+                </p>
+            </div>
+            <div class="list">
+                <p>
+                    <span class="title">类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型：</span>
+                    <span>{$info['type']==1?'员工':'临时施工'}</span>
+                </p>
+            </div>
+            <div class="list">
+                <p>
+                    <span class="title">&nbsp;商&nbsp;铺&nbsp;号&nbsp;：</span>
+                    <span>{$info.store_id}</span>
+                </p>
+            </div>
+        </div>
+        <div class="btn">
+            <if condition="$info['status'] eq 0 or $info['status'] eq 2">
+                 <a href="{:U('register',array('id'=>$info['id']))}">修改信息</a>
+            <else/>
+                <eq name="info.status" value="3">
+                         <a href="{:U('register')}">重新申请</a>
+                    <else />
+
+                </eq>
+            </if>
         </div>
     </div>
-    <!--<div class="comm-logo">-->
-        <!--<i class="icon"></i>-->
-        <!--<p>喵票提供技术支持</p>-->
-    <!--</div>-->
-
-    <script src="__pub__/fenxiao/js/font_size.js"></script>
+</section>
 </body>
+<script src="__ROOT__/tpl/simplebootx_mobile/Mobile/Pass/js/zepto.min.js"></script>
+<script src="__ROOT__/tpl/simplebootx_mobile/Mobile/Pass/js/weui.js"></script>
 </html>

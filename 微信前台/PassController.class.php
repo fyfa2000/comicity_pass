@@ -12,6 +12,7 @@ class PassController extends Base2Controller{
     /*电子出入证首页*/
     public function index(){
         $id = I('get.id');  //申请注册提交成功或者是修改信息成功时，跳转到首页，都带数据库表出入证的id参数;
+//        var_dump($id);exit;
         if ($id){
 //            var_dump($id);exit;
             $info = $this->logModel->findId($id);
@@ -64,28 +65,62 @@ class PassController extends Base2Controller{
 //var_dump($data);exit;
             //正常的注册提交post时返回：array(6) { ["id"]=> string(0) "" ["name"]=> string(4) "1111" ["phone"]=> string(4) "1111" ["card_id"]=> string(4) "1111" ["store_id"]=> string(4) "1111" ["ticket"]=> string(1) "1" }
             //首页点击修改信息后，填写修改后再提交post返回：array(6) { ["id"]=> string(2) "21" ["name"]=> string(8) "11112222" ["phone"]=> string(8) "11112222" ["card_id"]=> string(7) "1111222" ["store_id"]=> string(8) "11112222" ["ticket"]=> string(1) "1" }
-
+            //后来加了上传图片的返回数据：array(8) {
+            //  ["name"]=> string(8) "11112222"
+            //  ["card_id"]=> string(7) "1111222"
+            //  ["phone"]=>  string(11) "13751861851"
+            //  ["store_id"]=>  string(8) "11112222"
+            //  ["type"]=>  string(12) "施工人员"
+            //  ["uploaderImg1"]=>  array(1) {
+                    //    [0]=> string(70) "http://t.comicity.cn/data/upload/pass/20200831/202008310408364987.jpeg"
+                    //  }
+            //  ["uploaderImg2"]=> array(2) {
+            //    [0]=> string(70) "http://t.comicity.cn/data/upload/pass/20200831/202008310408434593.jpeg"
+            //    [1]=> string(70) "http://t.comicity.cn/data/upload/pass/20200831/2020083104084816854.png"
+            //  }
+            //  ["uploaderImg3"]=> array(1) {
+            //    [0]=> string(70) "http://t.comicity.cn/data/upload/pass/20200831/2020083104085327735.png"
+            //  }
+            //}
             if(!$data['card_id'] || !$data['name'] || !$data['phone'] || !$data['store_id']){
                 $this->error('请输入完整数据',U('register'));
             }
             $data['openid'] = $this->tian_open_id;
-            $data=$this->escapeString($data);
+//            $data=$this->escapeString($data);
             //前台POST过来的数据，写进数据库前过滤
 //            var_dump($data);exit;
 
+
+
             /*下面这里处理上传照片的逻辑*/
-
-
-
-
+            $data['photo'] = substr($data['uploaderImg1'][0],strpos ($data['uploaderImg1'][0],'d'));
+//            var_dump($data['photo']);exit;
+            //string(50) "data/upload/pass/20200831/2020083104514428004.jpeg"
+            $data['card_img1'] = substr($data['uploaderImg2'][0],strpos ($data['uploaderImg2'][0],'d'));
+            $data['card_img2'] = substr($data['uploaderImg2'][1],strpos ($data['uploaderImg2'][1],'d'));
+            $data['certificate1'] = substr($data['uploaderImg3'][0],strpos ($data['uploaderImg3'][0],'d'));
+            $data['certificate2'] = substr($data['uploaderImg3'][1],strpos ($data['uploaderImg3'][1],'d'));
+            $data['certificate3'] = substr($data['uploaderImg3'][2],strpos ($data['uploaderImg3'][2],'d'));
+            $data['certificate4'] = substr($data['uploaderImg3'][3],strpos ($data['uploaderImg3'][3],'d'));
+            $data['certificate5'] = substr($data['uploaderImg3'][4],strpos ($data['uploaderImg3'][4],'d'));
+//            var_dump($data['id']);exit;
 
             $res = $this->logModel->addPass($data); //返回数据表的id或false
-//            var_dump($data['id']);exit;
+//            var_dump($res);exit;
             if ($res){
                 if ($res==1){  //model层如果是更新表数据，返回的$res是成功1或ture
-                    $this->success('申请成功',U('index',array('id'=>$data['id'])));
+//                    $this->success('申请成功',U('Pass/index',array('id'=>$data['id'])));
+//                    var_dump($data['id']);exit;
+                    $data = array(
+                        'a'=>$data['id']);
+                    $this->ajaxReturn($data);
                 }else{   //model层如果是新增表数据，返回的$res是新增记录的id值
-                    $this->success('申请成功',U('index',array('id'=>$res)));
+//                    var_dump($res); exit;
+//                    $this->redirect('index');
+//                    $this->success('申请成功',U('Pass/index',array('id'=>$res)));
+                    $data = array(
+                        'a'=>$res);
+                    $this->ajaxReturn($data);
                 }
 
             }else{
@@ -96,6 +131,20 @@ class PassController extends Base2Controller{
             链接：http://t.comicity.cn/index.php?s=/Mobile/Pass/register/id/13
             */
             $info = $this->logModel->findId($id);
+            //组装图片数据给前端
+
+            $info['uploaderImg1'][0] = sp_get_host().'/'.$info['photo'];   //"data/upload/pass/20200831/2020083109370624780.png"
+            $info['uploaderImg2'][0] = sp_get_host().'/'.$info['card_img1'];
+            $info['uploaderImg2'][1] = sp_get_host().'/'.$info['card_img2'];
+            $info['uploaderImg3'][0] = sp_get_host().'/'.$info['certificate1'];
+            $info['uploaderImg3'][1] = sp_get_host().'/'.$info['certificate2'];
+            $info['uploaderImg3'][2] = sp_get_host().'/'.$info['certificate3'];
+            $info['uploaderImg3'][3] = sp_get_host().'/'.$info['certificate4'];
+            $info['uploaderImg3'][4] = sp_get_host().'/'.$info['certificate5'];
+
+
+
+//            var_dump($info);exit;
             $this->assign('info',$info);
             $this->display();         
         }else{
