@@ -57,6 +57,10 @@ class PassadminController extends AdminbaseController {
                         $res=M('Pass')->where(array('id'=>$v['id']))->setField('status',3);
 //                        echo M('Pass')->getLastSql();exit;
                     }
+                    if ($v['status']==3 && time()<$v['expiry_date'] && $v['check_biz']==2){
+                        //如果出入证当前状态是过期的,且客服部审核状态是通过的，但当前时间小于有效期的，说明中途去后台延长了有效期，出入证状态变有效了
+                        M('Pass')->where(array('id'=>$v['id']))->setField('status',1);
+                    }
                     $list[$key]['type_name']=get_type_name($v['type']);
                     //get_type_name这个方法在/application/Pass/Common/function.php中定义
                     $list[$key]['status_name']=get_status_name($v['status']);
@@ -155,13 +159,15 @@ class PassadminController extends AdminbaseController {
             $data['type'] =  $take_data['type'];   //申请人类型，是员工还是临时工
             $data['store_id'] =  $take_data['store_id'];   //商铺号
 //            $data['back']=$id;
-            $data['expiry_date']=strtotime($take_data['expiry_date']);  //expiry_date有效期
             $check_res_status=$take_data['status'];   //审核通过还是不通过。1通过，2不通过；
 //            var_dump($check_type);exit;
             if ($check_type==1){
                 $data['check_biz']=$check_res_status;
                 $data['biz_verify']=$content;
                 $data['biz_verify_time']=time();
+                //如果当前页面是在客服部审核页面，就把有效期存到数据库；
+                //如果当前页面是在培训安管部审核页面，有效期是空的，就不要去覆盖数据库了。
+                $data['expiry_date']=strtotime($take_data['expiry_date']);  //expiry_date有效期
             }else{
                 $data['check_tra']=$check_res_status;
                 $data['train_verify']=$content;
@@ -190,13 +196,18 @@ class PassadminController extends AdminbaseController {
 //                var_dump($info);exit;
                 switch ($info['type']){
                     case 1:
-                        if ($info['check_biz']==2){
+                        //如果类型是员工，则只需要客服部核销通过即可；且当前时间是小于设置的出入证有效日期的
+                        if ($info['check_biz']==2 && time()<$info['expiry_date']){
                             $passModel->where(array('id'=>$id))->setField('status',1);
                         }
                         break;
                     case 2:
-                        if ($info['check_biz']==2 && $info['check_tra']==2){
+//                        var_dump($info);exit;
+                        //如果类型是临时工，需要客服部和培训部都通过，且在有效期内
+                        if ($info['check_biz']==2 && $info['check_tra']==2 && time()<$info['expiry_date']){
+
                             $passModel->where(array('id'=>$id))->setField('status',1);
+//                            echo $passModel->getLastSql();exit;
                         }
                         break;
 

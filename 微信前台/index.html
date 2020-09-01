@@ -25,7 +25,7 @@
                     <span>有效期至：</span>
                     <span>
                         <eq name="info.status" value="1">
-                              <if condition="$info['expiry_date'] neq 0">{$info.expiry_date|date="Y-m",###}</if>
+                              <if condition="$info['expiry_date'] neq 0">{$info.expiry_date|date="Y-m-d",###}</if>
                         <else />
                             {$info.status_name}
                         </eq>
