@@ -60,7 +60,9 @@ class PassController extends Base2Controller{
     /*申请出入证*/
     public function register(){
         $id = I('get.id');   //如果$id有值，说明是前台点击index页面的“修改信息”进到申请注册页
-        if(!$id && IS_POST) {   //注意：这里get的id为空，但后面post的数据里也有一个id；
+        if(!$id && IS_POST) {
+            //注意：如果是首次注册，这里get的id为空；如果是修改信息转到这里，在前台跳转时也是不带get的id的，也就是这里$id也是空，
+            //但要注意的是修改信息跳转过来时，会另外post一个id过来；
             $data = I('post.');
 //var_dump($data);exit;
             //正常的注册提交post时返回：array(6) { ["id"]=> string(0) "" ["name"]=> string(4) "1111" ["phone"]=> string(4) "1111" ["card_id"]=> string(4) "1111" ["store_id"]=> string(4) "1111" ["ticket"]=> string(1) "1" }
@@ -142,6 +144,7 @@ class PassController extends Base2Controller{
             $info['uploaderImg3'][3] = sp_get_host().'/'.$info['certificate4'];
             $info['uploaderImg3'][4] = sp_get_host().'/'.$info['certificate5'];
 
+//            $info['uploaderImg2']['num']=3;
 
 
 //            var_dump($info);exit;

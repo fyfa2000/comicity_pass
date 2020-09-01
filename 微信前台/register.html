@@ -96,6 +96,11 @@
                                 </div>
                                 <div class="weui-uploader__bd">
                                     <ul class="weui-uploader__files" id="uploaderFiles">
+                                        <foreach name="info.uploaderImg1" item="v">
+                                            <neq name="v" value="http://t.comicity.cn/">
+                                                <li class="weui-uploader__file" data-url="{$v}" data-input="{$v}" style="background-image: url({$v});"></li>
+                                            </neq>
+                                        </foreach>
                                         <!-- <li class="weui-uploader__file" style="background-image: url(https://weui.io/images/pic_160.png);"></li> -->
                                         <!-- <li class="weui-uploader__file" style="background-image: url(https://weui.io/images/pic_160.png);"></li> -->
                                     </ul>
@@ -129,11 +134,16 @@
                                     <ul class="weui-uploader__files" id="uploaderFiles02">
                                         <!-- <li class="weui-uploader__file" style="background-image: url(https://weui.io/images/pic_160.png);"></li> -->
                                         <!-- <li class="weui-uploader__file" style="background-image: url(https://weui.io/images/pic_160.png);"></li> -->
-
+                                        <foreach name="info.uploaderImg2" item="v">
+                                            <neq name="v" value="http://t.comicity.cn/">
+                                                <li class="weui-uploader__file"  data-url="{$v}" data-input="{$v}" style="background-image: url({$v});"></li>
+                                            </neq>
+                                        </foreach>
                                     </ul>
                                     <div class="weui-uploader__input-box">
                                         <input id="uploaderInput02" class="weui-uploader__input" type="file" accept="image/*" multiple="">
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -159,7 +169,11 @@
                                     <ul class="weui-uploader__files" id="uploaderFiles03">
                                         <!-- <li class="weui-uploader__file" style="background-image: url(https://weui.io/images/pic_160.png);"></li> -->
                                         <!-- <li class="weui-uploader__file" style="background-image: url(https://weui.io/images/pic_160.png);"></li> -->
-
+                                        <foreach name="info.uploaderImg3" item="v">
+                                            <neq name="v" value="http://t.comicity.cn/">
+                                                <li class="weui-uploader__file"  data-url="{$v}" data-input="{$v}" style="background-image: url({$v});"></li>
+                                            </neq>
+                                        </foreach>
                                     </ul>
                                     <div class="weui-uploader__input-box">
                                         <input id="uploaderInput03" class="weui-uploader__input" type="file" accept="image/*" multiple="">
@@ -205,6 +219,20 @@
 
 <script src="__ROOT__/tpl/simplebootx_mobile/Mobile/Pass/js/zepto.min.js"></script>
 <script src="__ROOT__/tpl/simplebootx_mobile/Mobile/Pass/js/weui.js"></script>
+<script>
+    $(function(){
+
+        if($("#uploaderFiles li").length >=1) {
+            $(".weui-uploader__input-box").eq(0).hide()
+        }
+        if($("#uploaderFiles02 li").length >=2) {
+            $(".weui-uploader__input-box").eq(1).hide()
+        }
+        if($("#uploaderFiles03 li").length >=5) {
+            $(".weui-uploader__input-box").eq(2).hide()
+        }
+    })
+</script>
 <script type="text/javascript">
     //上传图片地址
     var imgUrl1 = '{:U("Asset/Asset2/up_base64")}', //上传图片
@@ -243,6 +271,7 @@
                 topTips.fadeIn(200);setTimeout(function(){topTips.fadeOut(200)},2000)
                 return false;
             }
+
 
             // if(!$("#uploaderFiles03 li").length>0){
             //     topTips.html("请上传其他证照");
