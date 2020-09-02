@@ -24,6 +24,7 @@ class PassController extends Base2Controller{
             //如果不是从提交成功跳转来的，说明是链接直接index过来的，此时通过openid来读取用户对应的出入证首页
             $openid = $this->tian_open_id;
             $info = $this->logModel->findOpenid($openid);  //查时加条件status不等于-1，即被删除的出入证
+//            var_dump($info);exit;
             if(!$info){
                 //如果出入证数据库表中没有用户openid的任何数据，说明用户还没有提交过申请，跳转到申请页面
                 $this->redirect('register');
@@ -32,7 +33,7 @@ class PassController extends Base2Controller{
 
 //        echo $this->logModel->getLastSql(); exit;
 
-        /*array(24) {
+        /*array(1) { [0]=> array(24) {
         ["id"]=> string(1) "1"
         ["name"]=> string(6) "冯岩"
         ["openid"]=> string(28) "oQAXOvqnRZ4xcddTWIeE32KZfPBQ"
@@ -48,8 +49,10 @@ class PassController extends Base2Controller{
         ["status"]=> string(1) "3"
         ["biz_verify"]=> string(24) "业务部负责人-66666" ["biz_verify_time"]=> string(10) "1597732455" ["check_biz"]=> string(1) "2" ["train_verify"]=> string(0) "" ["train_verify_time"]=> NULL ["check_tra"]=> NULL }*/
         if ($info){
+            $info = $info[0];
             $info['status_name'] = get_pass_status_name($info['status']);
             //将出入证的状态转换为文字。在function公共方法中定义：（待审核0，正常生效1，未通过2，已过期3，已删除 -1）
+//            var_dump($info);exit;
             $this->assign('info',$info);
             $this->display();
         }else{

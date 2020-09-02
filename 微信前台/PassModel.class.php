@@ -27,7 +27,9 @@ class PassModel extends Model{
         $where['openid'] = $openid;
         $where['status'] = array('neq',-1);
 
-        return $this->where($where)->find();
+
+//        return $this->where($where)->find();
+        return $this->where($where)->order('id desc')->limit(1)->select();
     }
 
     /**
