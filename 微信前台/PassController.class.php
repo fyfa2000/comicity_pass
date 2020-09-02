@@ -136,6 +136,8 @@ class PassController extends Base2Controller{
             链接：http://t.comicity.cn/index.php?s=/Mobile/Pass/register/id/13
             */
             $info = $this->logModel->findId($id);
+//            echo $this->logModel->getLastSql();exit;  //SELECT * FROM `dmxc_pass` WHERE `id` = 107 AND ( status=0 or status=2 ) LIMIT 1
+//            var_dump($info);exit;
             //组装图片数据给前端
 
             $info['uploaderImg1'][0] = sp_get_host().'/'.$info['photo'];   //"data/upload/pass/20200831/2020083109370624780.png"

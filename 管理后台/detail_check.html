@@ -113,7 +113,8 @@
                   <td>
                       <!--<input type="text" style="width:400px;" name="expiry_date" id="expiry_date" {$info.expiry_date}==0?value="":value="{$info.expiry_date|date='Y-m-d H:i:s',###}" style="color:" class="input input_hd J_datetime date" />-->
                       <!--<input type="text" style="width:400px;" name="expiry_date" id="expiry_date" value="{$info.expiry_date|date='Y-m-d H:i:s',###}" style="color:" class="input input_hd J_datetime date" />-->
-                      <input type="text" autocomplete="off" style="width:400px;" name="expiry_date" id="expiry_date" <if condition="$info.expiry_date eq null">value=""<else/>value="{$info.expiry_date|date='Y-m-d H:i:s',###}"</if> style="color:" class="input input_hd J_datetime date" />
+                      <input type="text" autocomplete="off" style="width:400px;" name="expiry_date" id="expiry_date" <if condition="$info.expiry_date eq null or $info.expiry_date eq 0">value=""<else/>value="{$info.expiry_date|date='Y-m-d H:i:s',###}"</if> style="color:" class="input input_hd J_datetime date" />
+                      <!--if condition="$info.expiry_date eq null or $info.expiry_date eq 0">value=""是为了让管理后台设置日期那里不会出现1970-1-1这种样式-->
                       <!--<span>留空为当前时间</span>-->
                   </td>
               </tr>

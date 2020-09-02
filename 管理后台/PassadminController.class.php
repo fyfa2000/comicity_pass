@@ -61,6 +61,12 @@ class PassadminController extends AdminbaseController {
                         //如果出入证当前状态是过期的,且客服部审核状态是通过的，但当前时间小于有效期的，说明中途去后台延长了有效期，出入证状态变有效了
                         M('Pass')->where(array('id'=>$v['id']))->setField('status',1);
                     }
+                    //如果客服部或安管部有一个未通过审核，并且出入证状态不是未通过时，修改状态为未通过
+                    if (($v['check_biz']==1 or $v['check_tra']==1) && $v['status']!=2){
+                        M('Pass')->where(array('id'=>$v['id']))->setField('status',2);
+                    }
+
+
                     $list[$key]['type_name']=get_type_name($v['type']);
                     //get_type_name这个方法在/application/Pass/Common/function.php中定义
                     $list[$key]['status_name']=get_status_name($v['status']);
@@ -154,9 +160,14 @@ class PassadminController extends AdminbaseController {
                 $this->error('未知的出入证');
             }
             $take_data=I('post.');
+//            var_dump($take_data);exit;   //array(6) { ["store_id"]=> string(2) "83" ["type"]=> string(1) "2" ["status"]=> string(1) "2" ["expiry_date"]=> string(0) "" ["id"]=> string(3) "106" ["check_type"]=> string(1) "1" }
 //            $back_id=I('back_id');
             $content=$take_data['content'];   //审核人姓名
             $data['type'] =  $take_data['type'];   //申请人类型，是员工还是临时工
+            if (!$take_data['expiry_date'] && $data['type']==1){
+                //因为临时工安管部审核时虽然前台隐藏了有效期设置，但仍会POST一个空过来，所以条件限定为$data['type']==1
+                $this->error('请设置出入证有效期后再提交');
+            }
             $data['store_id'] =  $take_data['store_id'];   //商铺号
 //            $data['back']=$id;
             $check_res_status=$take_data['status'];   //审核通过还是不通过。1通过，2不通过；
