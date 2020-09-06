@@ -56,12 +56,14 @@ class PassModel extends Model{
             return false;
         }
         if($data['id']){
-            $id=$this->save();  //更新原有数据，返回的是成功1（或true），失败0
+            $id=$this->save();  //更新原有数据，返回的是成功1（或true），失败false，返回0表示数据没有任何更新的地方。
+//        var_dump($id);exit;
         }else{
             $id=$this->add();  //新增的时候返回的是数据库表的自增id值
         }
 //        echo $id;die;
-        if(!$id){
+        if(!$id && $id!==0){
+            //如果没有后面一个条件，则当$id=0的时候，也会符合这个条件，从而导致前台在没有修改任何信息时提交会报错，无法提交；
             $this->error='添加失败';
             return false;
         }
