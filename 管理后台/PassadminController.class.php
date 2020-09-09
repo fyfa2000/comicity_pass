@@ -277,8 +277,63 @@ class PassadminController extends AdminbaseController {
 //
 //    }
 
+/*管理后台-待审核出入证列表*/
+
+public function check_pass(){
+        $cid=I('cid');
+        $title=I('title');
+        $author=I('author');
+        //        $where=array('status'=>array('gt',0));
+        if($cid){
+            $where['cid']=$cid;
+        }
+        if($cid==58){
+            $passModel=M('Pass');
+        //            $where1['type']=1;
+        //            $count=$passModel->where($where1)->count();
+
+            $count=$passModel->count();
+            $page=new \Think\Page($count);
+        //            $list=$passModel->where($where1)
+            $where1['status'] = array('eq',0);
+            $list=$passModel
+                ->where($where1)
+                ->order('apply_time desc')
+                ->limit($page->firstRow.','.$page->listRows)
+                ->select();
+        //            var_dump($list);die;  //1597927110--1606665600
+        //            var_dump($list[0]['expiry_date']);die;
+            if($list){
+                foreach($list as $key=>$v){
+                    /*判断是否过期并更新数据表*/
+//                    if ($v['status']==1 && time()>$v['expiry_date']){
+//                        //如果出入证是正常生效的，并且当前时间大于有效期的
+//                        $res=M('Pass')->where(array('id'=>$v['id']))->setField('status',3);
+//        //                        echo M('Pass')->getLastSql();exit;
+//                    }
+//                    if ($v['status']==3 && time()<$v['expiry_date'] && $v['check_biz']==2){
+//                        //如果出入证当前状态是过期的,且客服部审核状态是通过的，但当前时间小于有效期的，说明中途去后台延长了有效期，出入证状态变有效了
+//                        M('Pass')->where(array('id'=>$v['id']))->setField('status',1);
+//                    }
+//                    //如果客服部或安管部有一个未通过审核，并且出入证状态不是未通过时，修改状态为未通过
+//                    if (($v['check_biz']==1 or $v['check_tra']==1) && $v['status']!=2){
+//                        M('Pass')->where(array('id'=>$v['id']))->setField('status',2);
+//                    }
 
 
+                    $list[$key]['type_name']=get_type_name($v['type']);
+                    //get_type_name这个方法在/application/Pass/Common/function.php中定义
+                    $list[$key]['status_name']=get_status_name($v['status']);
+        //                    $v['user_name']=$v['name'];
+                }
+            }
+            $this->assign('title','待审核出入证列表');
+            $this->assign('cid',$cid);
+            $this->assign('list',$list);
+            $this->assign('page',$page->show('Admin'));
+            $this->display('pass_list');
+            }
+}
 
 
 
