@@ -71,6 +71,8 @@ class PassadminController extends AdminbaseController {
                     //get_type_name这个方法在/application/Pass/Common/function.php中定义
                     $list[$key]['status_name']=get_status_name($v['status']);
 //                    $v['user_name']=$v['name'];
+                    $str = $list[$key]['phone'];
+                    $list[$key]['phone'] = substr($str,0,3)."-".substr($str,3,4)."-".substr($str,7,4);
                 }
             }
 //            var_dump($list);die;
@@ -96,6 +98,7 @@ class PassadminController extends AdminbaseController {
                         }
                     [1]=> array(14) {……
                     */
+
             $this->assign('title','出入证列表');
             $this->assign('cid',$cid);
             $this->assign('list',$list);
@@ -232,7 +235,11 @@ class PassadminController extends AdminbaseController {
         }else{
             if($id){
                 $info=$passModel->find($id);
+//               echo $passModel->getLastSql();exit;
 //                $back=$passModel->where(array('back'=>$id,'type'=>2))->find();
+//                $this->assign('info',Array ( 'id' => 112, 'name' => "李劲麟",'hkkne' => "13555555555"));
+                $str = $info['phone'];
+                $info['phone'] = substr($str,0,3)."-".substr($str,3,4)."-".substr($str,7,4);
                 $this->assign('info',$info);
                 $this->assign('check_type',$check_type);
 //var_dump($info);exit;
