@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="4f99fe65-159e-4e37-8a66-c5e4c2fca3b2" name="默认更改列表" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/微信前台/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/微信前台/register.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/管理后台/PassadminController.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/管理后台/PassadminController.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/管理后台/pass_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/管理后台/pass_list.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,59 +15,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/管理后台/pass_list.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="60" column="48" selection-start-line="60" selection-start-column="37" selection-end-line="60" selection-end-column="48" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/管理后台/PassadminController.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="307" column="36" lean-forward="true" selection-start-line="307" selection-start-column="36" selection-end-line="307" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/管理后台/detail_check.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3248">
-              <caret line="116" column="131" selection-start-line="116" selection-start-column="131" selection-end-line="116" selection-end-column="131" />
-              <folding>
-                <element signature="n#style#0;n#img#0;n#a#0;n#td#0;n#tr#4;n#table#0;n#div#0;n#div#0;n#form#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#a#0;n#td#0;n#tr#5;n#table#0;n#div#0;n#div#0;n#form#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/微信前台/PassController.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="143" column="76" selection-start-line="143" selection-start-column="76" selection-end-line="143" selection-end-column="76" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/微信前台/PassModel.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1204">
-              <caret line="43" column="44" selection-start-line="43" selection-start-column="44" selection-end-line="43" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/微信前台/register.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4844">
-              <caret line="173" column="115" selection-start-line="173" selection-start-column="115" selection-end-line="173" selection-end-column="115" />
+            <state relative-caret-position="152">
+              <caret line="258" column="13" selection-start-line="258" selection-start-column="13" selection-end-line="258" selection-end-column="13" />
               <folding>
                 <element signature="n#style#0;n#li#0;n#neq#0;n#foreach#0;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#8;n#div#1;n#div#0;n#div#1;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -75,11 +26,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/微信前台/index.html">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/管理后台/PassadminController.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="672">
-              <caret line="24" column="38" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
+            <state relative-caret-position="364">
+              <caret line="82" lean-forward="true" selection-start-line="82" selection-end-line="82" />
             </state>
           </provider>
         </entry>
@@ -101,11 +52,11 @@
       <list>
         <option value="$PROJECT_DIR$/微信前台/index.html" />
         <option value="$PROJECT_DIR$/管理后台/datePicker.js" />
-        <option value="$PROJECT_DIR$/微信前台/register.html" />
         <option value="$PROJECT_DIR$/管理后台/detail_check.html" />
         <option value="$PROJECT_DIR$/微信前台/PassModel.class.php" />
         <option value="$PROJECT_DIR$/微信前台/PassController.class.php" />
         <option value="$PROJECT_DIR$/管理后台/pass_list.html" />
+        <option value="$PROJECT_DIR$/微信前台/register.html" />
         <option value="$PROJECT_DIR$/管理后台/PassadminController.class.php" />
       </list>
     </option>
@@ -177,18 +128,20 @@
       <workItem from="1598954426922" duration="9285000" />
       <workItem from="1598969801721" duration="598000" />
       <workItem from="1599017500681" duration="6810000" />
-      <workItem from="1599628674761" duration="1900000" />
+      <workItem from="1599628674761" duration="2927000" />
+      <workItem from="1600337710288" duration="882000" />
+      <workItem from="1600656211708" duration="4496000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34159000" />
+    <option name="totallyTimeSpent" value="40564000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16689008" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17158177" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -223,6 +176,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/管理后台/pass_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1680">
+          <caret line="60" column="48" selection-start-line="60" selection-start-column="37" selection-end-line="60" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/管理后台/detail_check.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3248">
@@ -234,20 +194,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/微信前台/PassController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4004">
+          <caret line="143" column="76" selection-start-line="143" selection-start-column="76" selection-end-line="143" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/微信前台/PassModel.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1204">
           <caret line="43" column="44" selection-start-line="43" selection-start-column="44" selection-end-line="43" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/微信前台/register.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4844">
-          <caret line="173" column="115" selection-start-line="173" selection-start-column="115" selection-end-line="173" selection-end-column="115" />
-          <folding>
-            <element signature="n#style#0;n#li#0;n#neq#0;n#foreach#0;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#8;n#div#1;n#div#0;n#div#1;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -258,24 +215,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/微信前台/PassController.class.php">
+    <entry file="file://D:/Desktop/register2020-09-21(1).html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="143" column="76" selection-start-line="143" selection-start-column="76" selection-end-line="143" selection-end-column="76" />
+        <state relative-caret-position="-15106">
+          <folding>
+            <element signature="n#style#0;n#li#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#li#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#li#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/管理后台/pass_list.html">
+    <entry file="file://$PROJECT_DIR$/微信前台/register.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="60" column="48" selection-start-line="60" selection-start-column="37" selection-end-line="60" selection-end-column="48" />
+        <state relative-caret-position="152">
+          <caret line="258" column="13" selection-start-line="258" selection-start-column="13" selection-end-line="258" selection-end-column="13" />
+          <folding>
+            <element signature="n#style#0;n#li#0;n#neq#0;n#foreach#0;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#8;n#div#1;n#div#0;n#div#1;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/管理后台/PassadminController.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="307" column="36" lean-forward="true" selection-start-line="307" selection-start-column="36" selection-end-line="307" selection-end-column="36" />
+        <state relative-caret-position="364">
+          <caret line="82" lean-forward="true" selection-start-line="82" selection-end-line="82" />
         </state>
       </provider>
     </entry>
