@@ -30,7 +30,7 @@
           </tr>
           <tr>
               <th width="80">身份证号</th>
-              <td>
+              <td id="cardId">
                   {$info.card_id}
               </td>
           </tr>
@@ -183,6 +183,16 @@ $(function () {
 	        });
 	    });
 	});
+
+    $.post("{:U('Passadmin/getCardId',array('id'=>$info['id']))}",function(res){
+        console.log(res);
+        var card_id = res.card_id;
+        console.log(card_id);
+        document.all("cardId").innerText = card_id;
+    },"json");
+
+
+
 });
 </script>
 </body>

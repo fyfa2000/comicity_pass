@@ -10,12 +10,14 @@ class PassadminController extends AdminbaseController {
     private $newsOtherModel;
     private $newsCateModel;
     private $newsFloorModel;
+    private $passModel1;
     public function __construct(){
         parent::__construct();
         $this->newsModel=D('News');
         $this->newsOtherModel=D('NewsOther');
         $this->newsCateModel=D('NewsCate');
         $this->newsFloorModel=D('NewsFloor');
+        $this->passModel1=D('Pass');
     }
     /*列表*/
     public function pass_list(){
@@ -34,19 +36,24 @@ class PassadminController extends AdminbaseController {
 //            $where['cid']=array('in','23,24');
 //        }
         if($cid==57){
-            $passModel=M('Pass');
+//            $passModel=M('Pass');
 //            $where1['type']=1;
 //            $count=$passModel->where($where1)->count();
 
-            $count=$passModel->count();
+            $count=$this->passModel1->count();
             $page=new \Think\Page($count);
 //            $list=$passModel->where($where1)
-            $where1['status'] = array('neq',-1);
-            $list=$passModel
-                ->where($where1)
-                ->order('apply_time desc')
-                ->limit($page->firstRow.','.$page->listRows)
-                ->select();
+//            $where1['status'] = array('neq',-1);
+////            $list=$passModel
+//            $list=$this->passModel1
+//                ->where($where1)
+//                ->order('apply_time desc')
+//                ->limit($page->firstRow.','.$page->listRows)
+//                ->select();
+            $list=$this->passModel1->getList();
+            //这个是遇到身份证被替换成星号时，以为通过model层可以解决的尝试，最后并没解决问题
+
+
 //            var_dump($list);die;  //1597927110--1606665600
 //            var_dump($list[0]['expiry_date']);die;
             if($list){
@@ -241,7 +248,15 @@ class PassadminController extends AdminbaseController {
                 $info=$passModel->find($id);
 //               echo $passModel->getLastSql();exit;
 //                $back=$passModel->where(array('back'=>$id,'type'=>2))->find();
-//                $this->assign('info',Array ( 'id' => 112, 'name' => "李劲麟",'hkkne' => "13555555555"));
+//                $a="440923199207274823";
+//                $b=intval($a);
+//                $b=number_format($a);
+//                $a = number_format($info['card_id']);
+//                var_dump($a);exit;
+//                $info['card_id'] = str_replace(',', '', $a);
+//                $b = json_decode($a, false, 512);
+//                $b = str_replace(',', '', $b);
+//                $this->assign('info',Array ( 'id' => 112, 'name' => "李劲麟",'hkkne' => $b));
                 $str = $info['phone'];
                 $info['phone'] = substr($str,0,3)."-".substr($str,3,4)."-".substr($str,7,4);
                 $this->assign('info',$info);
@@ -280,13 +295,14 @@ class PassadminController extends AdminbaseController {
         ["check_tra"]=> NULL }*/
 
 
-/*出入证前台视图层*/
-//
-//    public function passView(){
-//
-//
-//
-//    }
+    /*管理后台审核页面获取用户信息，用于身份证号显示*/
+    public function getCardId(){
+        $passModel=M('Pass');
+        $id = I('get.id');
+//        $id = 116;
+        $info = $passModel->find($id);
+        $this->ajaxReturn($info);
+    }
 
 /*管理后台-待审核出入证列表*/
 

@@ -60,7 +60,8 @@
             <div class="list">
                 <p>
                     <span class="title">身份证件：</span>
-                    <span>{$info.card_id}</span>
+                    <!--<span>{$info.card_id}</span>-->
+                    <span id="cardId">{$card_id}</span>
                 </p>
             </div>
             <div class="list">
@@ -90,6 +91,18 @@
     </div>
 </section>
 </body>
+<script src="__ROOT__/tpl/simplebootx_mobile/Mobile/Pass/js/jquery.min.js"></script>
 <script src="__ROOT__/tpl/simplebootx_mobile/Mobile/Pass/js/zepto.min.js"></script>
 <script src="__ROOT__/tpl/simplebootx_mobile/Mobile/Pass/js/weui.js"></script>
+<script>
+    $(function(){
+        $.post("{:U('Pass/getCardId',array('id'=>$info['id']))}",function(res){
+        console.log(res);
+        var card_id = res.card_id;
+        console.log(card_id);
+        document.all("cardId").innerText = card_id;
+        },"json");
+    })
+</script>
+
 </html>

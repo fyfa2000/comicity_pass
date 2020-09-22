@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <include file="./themes/simplebootx/Film/fenxiao/Public/head.html" />
+</head>
+<body>
+    <header class="comm-header">
+        <a href="javascript:history.back(-1)" class="comm-header-left"></a>
+        <div class="comm-header-center">
+            电子出入证
+        </div>
+        <!-- <div class="comm-header-right"></div> -->
+    </header>
+    <div class="comm-container content_in_logo color">
+        <div class="basics-list interval_top">
+            <div class="basics-list-item"><span>相片：</span><p><img style="width: 3rem;" src="__ROOT__/{$info.photo}" alt=""></p></div>
+            <!--<div class="basics-list-item"><span>有效期至：</span>{$info.expiry_date}</div>-->
+            <div class="basics-list-item"><span>有效期至：</span>
+                <eq name="info.status" value="1">
+                    {$info.expiry_date|date="Y-m",###}
+                <else />
+                    {$info.status_name}
+                </eq>
+            </div>
+            <div class="basics-list-item"><span>审核人：</span>
+                <eq name="info.type" value="1">
+                客服经营部
+                    <else />
+                安管部
+                </eq>
+            </div>
+            <div class="basics-list-item"><span>姓名：</span>{$info.name}</div>
+            <div class="basics-list-item"><span>电话：</span>{$info.phone}</div>
+            <div class="basics-list-item"><span>身份证号：</span>{$info.card_id}</div>
+            <div class="basics-list-item"><span>类型：</span>{$info['type']==1?'员工':'临时施工'}</div>
+            <div class="basics-list-item"><span>商铺号：</span>{$info.store_id}</div>
+            <div class="basics-list-item"><span>出入证当前状态：</span>{$info.status}</div>
+            <div class="basics-list-item"><span>出入证id：</span>{$info.id}</div>
+            <div class="info_btn" style="padding-top:20px">
+                <button class="infomation_btn"><a href="{:U('register',array('id'=>$info['id']))}">修改信息</a></button>
+            </div>
+
+            <!--<div class="basics-list-item"><span>openid：</span><p>{$fenxiao.openid}</p></div>-->
+            <!--<div class="basics-list-item"><span>链&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;接：</span><p>http://c.miaopiao.me__ROOT__/index.php?g=Film&m=Index&a=index&fid={$fenxiao.id} </p></div>-->
+        </div>
+    </div>
+    <!--<div class="comm-logo">-->
+        <!--<i class="icon"></i>-->
+        <!--<p>喵票提供技术支持</p>-->
+    <!--</div>-->
+
+    <script src="__pub__/fenxiao/js/font_size.js"></script>
+</body>
+</html>

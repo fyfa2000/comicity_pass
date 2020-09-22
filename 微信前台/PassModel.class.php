@@ -71,6 +71,22 @@ class PassModel extends Model{
     }
 
 
+    /**
+     * 管理后台获取所有出入证列表
+     * @return mixed
+     */
+    public function getList(){
+        $count=$this->count();
+        $page=new \Think\Page($count);
+        $where1['status'] = array('neq',-1);
+        return $this->where($where1)
+//            ->order('id desc')
+            ->order('apply_time desc')
+            ->limit($page->firstRow.','.$page->listRows)
+            ->select();
+
+    }
+
 
 
 
