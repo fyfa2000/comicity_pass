@@ -46,6 +46,20 @@ class PassModel extends Model{
 
 
     /**
+     * 用于前台显示身份证信息，通过出入证数据表的id查找出入证申请表
+     * @param $id
+     * @return mixed
+     */
+    public function findId2($id){
+        $where['id'] = $id;
+//        $where['status'] = 0 or 2;
+//        $where['_string']= "status=0 or status=2";
+        return $this->where($where)->find();
+    }
+
+
+
+    /**
      * 添加与更新出入证申请信息
      *
      * @param array $data

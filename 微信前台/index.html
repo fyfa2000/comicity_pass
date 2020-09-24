@@ -9,7 +9,18 @@
     <link rel="stylesheet" href="__ROOT__/tpl/simplebootx_mobile/Mobile/Pass/css/weui.css">
     <link rel="stylesheet" href="__ROOT__/tpl/simplebootx_mobile/Mobile/Pass/css/app.css">
     <script src=""></script>
+    <style>
+        .headImg img{
+            width:100%;			/* ... */
+            height:100%;		/* ... */
+            display:block;
+        }
+    </style>
+
 </head>
+
+
+
 
 <body>
 <section class="userInfo">
@@ -82,7 +93,7 @@
                  <a href="{:U('register',array('id'=>$info['id']))}">修改信息</a>
             <else/>
                 <eq name="info.status" value="3">
-                         <a href="{:U('register')}">重新申请</a>
+                         <a href="{:U('register',array('id'=>$info['id']))}">重新申请</a>
                     <else />
 
                 </eq>

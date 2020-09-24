@@ -66,10 +66,14 @@ class PassController extends Base2Controller{
     /*微信前台index页面获取用户信息，用于身份证号显示*/
     public function getCardId(){
         $id = I('get.id');
-        $info = $this->logModel->findId($id);
+//        $id = "125";
+        $info = $this->logModel->findId2($id);
+//        echo $this->logModel->getLastSql();exit;
 //        $card_id = $info['card_id'];
 //  //注意，本来想直接返回一个身份证号给前端就好，但之前也遇过，ajax返回时要用数组，不能返回字符串，否则会变成s。。。
-//        var_dump($card_id);
+//        var_dump($info);exit;
+        $cardId = $info['card_id'];
+        $info['card_id'] = substr_replace($cardId,"********",6,8);
         $this->ajaxReturn($info);
     }
 

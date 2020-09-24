@@ -59,8 +59,10 @@ class PassadminController extends AdminbaseController {
             if($list){
                 foreach($list as $key=>$v){
                     /*判断是否过期并更新数据表*/
-                    if ($v['status']==1 && time()>$v['expiry_date']){
-                        //如果出入证是正常生效的，并且当前时间大于有效期的
+//                    if ($v['status']==1 && time()>$v['expiry_date']){
+                    //  //如果出入证是正常生效的，并且当前时间大于有效期的
+                    if (time()>$v['expiry_date']){
+                    //不管当前出入证是什么状态，只要当前时间大于有效期，都设置为已过期
                         $res=M('Pass')->where(array('id'=>$v['id']))->setField('status',3);
 //                        echo M('Pass')->getLastSql();exit;
                     }
@@ -72,10 +74,10 @@ class PassadminController extends AdminbaseController {
                     if (($v['check_biz']==1 or $v['check_tra']==1) && $v['status']!=2){
                         M('Pass')->where(array('id'=>$v['id']))->setField('status',2);
                     }
-                    //如果客服部或安管部有一个待审核，并且客服部或安管部都不为未通过，说明中途去后台修改了正常生效的出入证为待审核，设置出入证为待审核状态
-                    if (($v['check_biz']==0 or $v['check_tra']==0) && ($v['check_biz']!=1 && $v['check_tra']!=1)){
-                        M('Pass')->where(array('id'=>$v['id']))->setField('status',0);
-                    }
+//                    //如果客服部或安管部有一个待审核，并且客服部或安管部都不为未通过，说明中途去后台修改了正常生效的出入证为待审核，设置出入证为待审核状态
+//                    if (($v['check_biz']==0 or $v['check_tra']==0) && ($v['check_biz']!=1 && $v['check_tra']!=1)){
+//                        M('Pass')->where(array('id'=>$v['id']))->setField('status',0);
+//                    }
 
 
                     $list[$key]['type_name']=get_type_name($v['type']);
@@ -225,6 +227,10 @@ class PassadminController extends AdminbaseController {
                         if ($info['check_biz']==2 && time()<$info['expiry_date']){
                             $passModel->where(array('id'=>$id))->setField('status',1);
                         }
+                        //如果客服部待审核，并且安管部不为未通过，说明中途去后台修改了正常生效的出入证为待审核，设置出入证为待审核状态
+                        if ($info['check_biz']==0 && $info['check_tra']!=1){
+                            $passModel->where(array('id'=>$id))->setField('status',0);
+                        }
                         break;
                     case 2:
 //                        var_dump($info);exit;
@@ -233,6 +239,9 @@ class PassadminController extends AdminbaseController {
 
                             $passModel->where(array('id'=>$id))->setField('status',1);
 //                            echo $passModel->getLastSql();exit;
+                        }
+                        if ($info['check_tra']==0 && $info['check_biz']!=1){
+                            $passModel->where(array('id'=>$id))->setField('status',0);
                         }
                         break;
 
