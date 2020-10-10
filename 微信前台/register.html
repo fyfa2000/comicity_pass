@@ -33,13 +33,13 @@
                     <div class="weui-cell weui-cell_active">
                         <div class="weui-cell__hd"><label class="weui-label"><span style="color: #f00">*</span>手机号码</label></div>
                         <div class="weui-cell__bd">
-                            <input id="js_input_mobile" class="weui-input" placeholder="请输入手机号码"  value="{$info.phone}" type="number" pattern="[0-9]*">
+                            <input id="js_input_mobile" class="weui-input" placeholder="请输入手机号码"  value="{$info.phone}" >
                         </div>
                     </div>
                     <div class="weui-cell weui-cell_active">
                         <div class="weui-cell__hd"><label class="weui-label"><span style="color: #f00">*</span>身份证</label></div>
                         <div class="weui-cell__bd">
-                            <input id="js_input_id" class="weui-input" placeholder="请输入身份证"  value="{$info.card_id}" type="number" pattern="[0-9]*">
+                            <input id="js_input_id" class="weui-input" placeholder="请输入身份证"  value="{$info.card_id}">
                         </div>
                     </div>
                     <div class="weui-cell weui-cell_active">
@@ -548,7 +548,7 @@
 
     function isCardNo(card){
         //身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X
-        var reg = /(^\d{15}$)|(^\d{17}(\d|X|x)$)/;
+        var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
         if(reg.test(card) === false){
             return false;
         }

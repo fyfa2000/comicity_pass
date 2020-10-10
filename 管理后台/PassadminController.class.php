@@ -268,7 +268,8 @@ class PassadminController extends AdminbaseController {
 //                $this->assign('info',Array ( 'id' => 112, 'name' => "李劲麟",'hkkne' => $b));
                 $str = $info['phone'];
                 $info['phone'] = substr($str,0,3)."-".substr($str,3,4)."-".substr($str,7,4);
-                $this->assign('info',$info);
+                $info['card_id'] = "";
+                    $this->assign('info',$info);
                 $this->assign('check_type',$check_type);
 //var_dump($info);exit;
 //                $this->assign('back',$back);

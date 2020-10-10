@@ -108,9 +108,7 @@
 <script>
     $(function(){
         $.post("{:U('Pass/getCardId',array('id'=>$info['id']))}",function(res){
-        console.log(res);
         var card_id = res.card_id;
-        console.log(card_id);
         document.all("cardId").innerText = card_id;
         },"json");
     })
