@@ -40,7 +40,7 @@ class PassModel extends Model{
     public function findId($id){
         $where['id'] = $id;
 //        $where['status'] = 0 or 2;
-        $where['_string']= "status=0 or status=2";
+        $where['_string']= "status=0 or status=2 or status=3";
         return $this->where($where)->find();
     }
 
