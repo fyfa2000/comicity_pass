@@ -77,6 +77,13 @@ class PassController extends Base2Controller{
         $this->ajaxReturn($info);
     }
 
+    /*微信前台register页面获取用户信息，用于身份证号和手机号显示*/
+    public function getCardId2(){
+        $id = I('get.id');
+        $info = $this->logModel->findId2($id);
+        $this->ajaxReturn($info);
+    }
+
 
     /*申请出入证*/
     public function register(){

@@ -33,13 +33,15 @@
                     <div class="weui-cell weui-cell_active">
                         <div class="weui-cell__hd"><label class="weui-label"><span style="color: #f00">*</span>手机号码</label></div>
                         <div class="weui-cell__bd">
-                            <input id="js_input_mobile" class="weui-input" placeholder="请输入手机号码"  value="{$info.phone}" >
+                            <input id="js_input_mobile" class="weui-input" placeholder="请输入手机号码"  value="" type="number" pattern="[0-9]*">
+                            <!--<input id="js_input_mobile" class="weui-input" placeholder="请输入手机号码"  value="{$info.phone}" type="number" pattern="[0-9]*">-->
                         </div>
                     </div>
                     <div class="weui-cell weui-cell_active">
                         <div class="weui-cell__hd"><label class="weui-label"><span style="color: #f00">*</span>身份证</label></div>
                         <div class="weui-cell__bd">
-                            <input id="js_input_id" class="weui-input" placeholder="请输入身份证"  value="{$info.card_id}">
+                            <input id="js_input_id" class="weui-input" placeholder="请输入身份证"  value="">
+                            <!--<input id="js_input_id" class="weui-input" placeholder="请输入身份证"  value="{$info.card_id}">-->
                         </div>
                     </div>
                     <div class="weui-cell weui-cell_active">
@@ -216,11 +218,19 @@
 </section>
 <div class="weui-toptips weui-toptips_warn" id="topTips"></div>
 </body>
-
+<script src="__ROOT__/tpl/simplebootx_mobile/Mobile/Pass/js/jquery.min.js"></script>
 <script src="__ROOT__/tpl/simplebootx_mobile/Mobile/Pass/js/zepto.min.js"></script>
 <script src="__ROOT__/tpl/simplebootx_mobile/Mobile/Pass/js/weui.js"></script>
 <script>
     $(function(){
+
+        $.post("{:U('Pass/getCardId2',array('id'=>$info['id']))}",function(res){
+            console.log(res);
+            var card_id = res.card_id;
+            var phone = res.phone;
+            $("#js_input_id").val(card_id);
+            $("#js_input_mobile").val(phone);
+        },"json");
 
         if($("#uploaderFiles li").length >=1) {
             $(".weui-uploader__input-box").eq(0).hide()
