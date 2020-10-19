@@ -61,7 +61,8 @@ class PassadminController extends AdminbaseController {
                     /*判断是否过期并更新数据表*/
 //                    if ($v['status']==1 && time()>$v['expiry_date']){
                     //  //如果出入证是正常生效的，并且当前时间大于有效期的
-                    if (time()>$v['expiry_date']){
+//                    var_dump($v['expiry_date']);exit;
+                    if ($v['expiry_date']!=null && time()>$v['expiry_date']){
                     //不管当前出入证是什么状态，只要当前时间大于有效期，都设置为已过期
                         $res=M('Pass')->where(array('id'=>$v['id']))->setField('status',3);
 //                        echo M('Pass')->getLastSql();exit;
