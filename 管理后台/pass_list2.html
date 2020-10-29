@@ -1,0 +1,106 @@
+<admintpl file="header" />
+</head>
+<body class="J_scroll_fixed">
+
+<php>
+	$check_res=array(0=>'待审核',1=>'未通过',2=>'通过');
+</php>
+	<div class="wrap J_check_wrap">
+		<!--<ul class="nav nav-tabs">-->
+			<!--<li class="active"><a>{$title}</a></li>-->
+			<!--<neq name="cid" value="57"><li><a href="{:U('edit',array('cid'=>$cid))}">添加</a></li></neq>-->
+		<!--</ul>-->
+        <!--<neq name="cid" value="57"><form class="well form-search" id="mainform"  action="{:U('Newsadmin/lists')}" method="post">-->
+            <!--标题：<input type="text" name="title" class="normal_input"/>-->
+            <!--发起者：<input type="text" name="author" class="normal_input"/>-->
+            <!--<input type="hidden" name="cid" value="{$cid}"/>-->
+            <!--<input type="submit" value="搜索" class="normal_input"/>-->
+        <!--</form></neq>-->
+		<!--<form method="post" class="J_ajaxForm" action="#">-->
+
+		<form  class="well form-search" id="mainform"  action="{:U('Passadmin/check_pass')}" method="post">
+			姓名：<input type="text" name="name" value="" class="normal_input"/>
+			<input type="submit" value="搜索" class="normal_input"/>
+			<input type="hidden" name="cid" value="58" class="normal_input"/>
+			<!--<input type="button" id="export" value="导出" class="normal_input"/>-->
+		</form>
+
+			<div class="table_list">
+				<table class="table table-hover table-bordered">
+					<thead>
+						<tr>
+                            <th width="15"><label><input type="checkbox" class="J_check_all" data-direction="x" data-checklist="J_check_x"></label></th>
+							<th align='center'>ID</th>
+							<th>微信openid</th>
+							<th>姓名</th>
+							<th>手机</th>
+							<th>身份证号</th>
+							<th>商铺号</th>
+							<!--<th>照片</th>-->
+							<th>类型</th>
+							<th>有效期</th>
+							<th>申请时间</th>
+							<th>状态</th>
+							<!--<th>业务部审核人</th>-->
+							<th>客服部审核</th>
+							<!--<th>培训部审核人</th>-->
+							<th>安管部审核</th>
+							<th align='center'>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<foreach name="list" item="vo">
+						<tr>
+                            <td><input type="checkbox" class="J_check" data-yid="J_check_y" data-xid="J_check_x" name="ids[]" value="{$vo.id}" ></td>
+							<td align='center'>{$vo.id}</td>
+							<td>{$vo.openid}</td>
+                            <td>{$vo.name}</td>
+							<td>{$vo.phone}</td>
+							<td>******************</td>
+							<!--<td>{$vo.card_id}</td>-->
+							<td>{$vo.store_id}</td>
+							<!--<td>-->
+								<!--<a href="{$vo.photo}"><img style="height: 80px;" src="{$vo.photo}" alt=""/></a>-->
+							<!--</td>-->
+							<!--<td>{$vo.photo}</td>-->
+							<td>{$vo.type_name}</td>
+							<td><if condition='$vo.expiry_date neq 0'>{$vo.expiry_date|date='Y-m-d H:i:s',###}</if></td>
+							<td>{$vo.apply_time|date='Y-m-d H:i:s',###}</td>
+							<td>{$vo.status_name}</td>
+							<!--<td>{$vo.biz_verify}</td>-->
+							<td>{$check_res[$vo['check_biz']]}</td>
+							<!--<td>{$vo.train_verify}</td>-->
+							<!--<td>{$check_res[$vo['check_tra']]}</td>-->
+							<td>
+								<if condition="$vo.type eq 2">{$check_res[$vo['check_tra']]}</if>
+							</td>
+							<td align='center'>
+								<!--<a href="{:U('send_message',array('id'=>$vo['id']))}">查看</a>-->
+								<!--<a href="{:U('shen',array('id'=>$vo['id'],'status'=>3))}">审核</a>-->
+								<!--<a href="{:U('shen',array('id'=>$vo['id'],'status'=>0))}">退回</a>-->
+                                <!--<neq name="cid" value="57"><a href="{:U('News/Newsadmin/edit',array('id'=>$vo['id']))}">编辑</a></neq>-->
+                                <!--<eq name="cid" value="57">-->
+								<if condition="$vo['type'] eq 2">
+									<a href="{:U('Pass/Passadmin/detail_check',array('id'=>$vo['id'],'check_type'=>1))}">客服部审核 |</a>
+									<a href="{:U('Pass/Passadmin/detail_check',array('id'=>$vo['id'],'check_type'=>2))}">安管部审核 |</a>
+									<a href="{:U('Pass/Passadmin/del_msg',array('id'=>$vo['id']))}" class="J_ajax_del">删除</a>
+								</if>
+								<if condition="$vo['type'] eq 1">
+									<a href="{:U('Pass/Passadmin/detail_check',array('id'=>$vo['id'],'check_type'=>1))}">客服部审核 |</a>
+									<a href="{:U('Pass/Passadmin/del_msg',array('id'=>$vo['id']))}" class="J_ajax_del">删除</a>
+								</if>
+							</td>
+						</tr>
+						</foreach>
+					</tbody>
+				</table>
+				<div class="pagination">{$page}</div>
+			</div>
+		<!--</form>-->
+	</div>
+	<script src="__ROOT__/statics/js/common.js"></script>
+    <script>
+//        alert((parseInt('A',16)+1).toString(16).toUpperCase());
+    </script>
+</body>
+</html>
