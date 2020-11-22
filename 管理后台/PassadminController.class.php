@@ -22,6 +22,8 @@ class PassadminController extends AdminbaseController {
     /*列表*/
     public function pass_list(){
         $cid=I('cid');
+        $name=I('name');
+        $store_id=I('store_id');
         $title=I('title');
         $author=I('author');
 //        $where=array('status'=>array('gt',0));
@@ -50,7 +52,13 @@ class PassadminController extends AdminbaseController {
 //                ->order('apply_time desc')
 //                ->limit($page->firstRow.','.$page->listRows)
 //                ->select();
-            $list=$this->passModel1->getList();
+            if ($name){
+                $where1['name']=array('like',"%$name%");
+            }
+            if ($store_id){
+                $where1['store_id']=array('like',"%$store_id%");
+            }
+            $list=$this->passModel1->getList($where1);
             //这个是遇到身份证被替换成星号时，以为通过model层可以解决的尝试，最后并没解决问题
 
 
@@ -319,6 +327,8 @@ class PassadminController extends AdminbaseController {
 
 public function check_pass(){
         $cid=I('cid');
+        $name=I('name');
+    $store_id=I('store_id');
         $title=I('title');
         $author=I('author');
         //        $where=array('status'=>array('gt',0));
@@ -333,12 +343,25 @@ public function check_pass(){
             $count=$passModel->count();
             $page=new \Think\Page($count);
         //            $list=$passModel->where($where1)
-            $where1['status'] = array('eq',0);
-            $list=$passModel
-                ->where($where1)
-                ->order('apply_time desc')
-                ->limit($page->firstRow.','.$page->listRows)
-                ->select();
+//            $where1['status'] = array('eq',0);
+//            if ($name){
+//                $where1['name']=array('like',"%$name%");
+//            }
+////                    var_dump($where1);exit;
+//            $list=$passModel
+//                ->where($where1)
+//                ->order('apply_time desc')
+//                ->limit($page->firstRow.','.$page->listRows)
+//                ->select();
+            if ($name){
+                $where2['name']=array('like',"%$name%");
+            }
+            if ($store_id){
+                $where2['store_id']=array('like',"%$store_id%");
+            }
+            $list=$this->passModel1->getList2($where2);
+
+
         //            var_dump($list);die;  //1597927110--1606665600
         //            var_dump($list[0]['expiry_date']);die;
             if($list){
@@ -369,7 +392,7 @@ public function check_pass(){
             $this->assign('cid',$cid);
             $this->assign('list',$list);
             $this->assign('page',$page->show('Admin'));
-            $this->display('pass_list');
+            $this->display('pass_list2');
             }
 }
 

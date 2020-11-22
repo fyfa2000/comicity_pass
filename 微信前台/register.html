@@ -225,7 +225,6 @@
     $(function(){
 
         $.post("{:U('Pass/getCardId2',array('id'=>$info['id']))}",function(res){
-            console.log(res);
             var card_id = res.card_id;
             var phone = res.phone;
             $("#js_input_id").val(card_id);

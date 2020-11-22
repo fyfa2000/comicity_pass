@@ -89,7 +89,7 @@ class PassModel extends Model{
      * 管理后台获取所有出入证列表
      * @return mixed
      */
-    public function getList(){
+    public function getList($where1){
         $count=$this->count();
         $page=new \Think\Page($count);
         $where1['status'] = array('neq',-1);
@@ -101,7 +101,21 @@ class PassModel extends Model{
 
     }
 
+    /**
+     * 管理后台获取待审核出入证列表
+     * @return mixed
+     */
+    public function getList2($where2){
+        $count=$this->count();
+        $page=new \Think\Page($count);
+        $where2['status'] = array('eq',0);
+        return $this->where($where2)
+//            ->order('id desc')
+            ->order('apply_time desc')
+            ->limit($page->firstRow.','.$page->listRows)
+            ->select();
 
+    }
 
 
 
