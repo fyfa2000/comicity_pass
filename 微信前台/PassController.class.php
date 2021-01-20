@@ -112,7 +112,8 @@ class PassController extends Base2Controller{
             //    [0]=> string(70) "http://t.comicity.cn/data/upload/pass/20200831/2020083104085327735.png"
             //  }
             //}
-            if(!$data['card_id'] || !$data['name'] || !$data['phone'] || !$data['store_id']){
+//            if(!$data['card_id'] || !$data['name'] || !$data['phone'] || !$data['store_id']){
+            if(!$data['card_id'] || !$data['name'] || !$data['phone']){
                 $this->error('请输入完整数据',U('register'));
             }
             $data['openid'] = $this->tian_open_id;
